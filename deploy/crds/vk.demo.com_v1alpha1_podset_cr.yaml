@@ -1,0 +1,8 @@
+apiVersion: vk.demo.com/v1alpha1
+kind: PodSet
+metadata:
+  name: example-podset
+spec:
+  # Add fields here
+  replicas: 3
+#  size: 3

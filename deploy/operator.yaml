@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-op
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: pod-op
+  template:
+    metadata:
+      labels:
+        name: pod-op
+    spec:
+      serviceAccountName: pod-op
+      containers:
+        - name: pod-op
+          # Replace this with the built image name
+          image: krvikash/pod-op:v1
+          command:
+          - pod-op
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "pod-op"
